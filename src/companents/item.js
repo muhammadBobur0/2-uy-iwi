@@ -1,4 +1,4 @@
-import css from './item.css';
+import './item.css';
 
 let Iteam = (props) => {
 	let complate = '';
