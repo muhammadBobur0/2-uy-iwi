@@ -12,7 +12,7 @@ function App() {
 		if (backlocal === undefined) {
 			return;
 		} else {
-			countries.push(...backlocal);
+			return countries.push(...backlocal);
 		}
 	}
 
