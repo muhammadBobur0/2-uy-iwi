@@ -49,9 +49,9 @@ function App() {
 						let id = evt.target.id;
 						countries.map((todo) => {
 							if (todo.id === id) {
-								todo.isComplate = !todo.isComplate;
+								return (todo.isComplate = !todo.isComplate);
 							}
-							return todo;
+							return (todo.isComplate = !todo.isComplate);
 						});
 
 						setCountry([...countries]);
