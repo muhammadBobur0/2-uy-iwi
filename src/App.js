@@ -8,8 +8,6 @@ function App() {
 	let backlocal = JSON.parse(window.localStorage.getItem('key'));
 	let [countries, setCountry] = React.useState([]);
 
-	console.log(countries);
-
 	if (countries.length === 0) {
 		if (backlocal === undefined) {
 			return;
