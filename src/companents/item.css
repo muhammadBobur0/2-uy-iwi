@@ -1,0 +1,22 @@
+.iteam {
+  display: flex;
+}
+
+h2{
+  margin: 0 20px;
+  
+}
+ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-top: 20px;
+}
+
+.delete-btn {
+  margin-left: 20px;
+}
+
+.com{
+  text-decoration: line-through;
+}

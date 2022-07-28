@@ -1,25 +1,71 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Iteam from './companents/item';
+import List from './companents/list';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	window.localStorage.setItem('key', '[]');
+	const [count, setCount] = React.useState('');
+	let backlocal = JSON.parse(window.localStorage.getItem('key'));
+	let [countries, setCountry] = React.useState([]);
+
+	if (countries.length == 0) {
+		countries.push(...backlocal);
+	}
+
+	return (
+		<div className='container'>
+			<form
+				onSubmit={(evt) => {
+					evt.preventDefault();
+					setCountry([
+						...countries,
+						{
+							id: Number(countries.length + 1),
+							name: count,
+							isComplate: false,
+						},
+					]);
+				}}>
+				<input
+					onChange={(evt) => {
+						setCount(evt.target.value);
+					}}
+					type='text'
+				/>
+				<button type='submit'> submit</button>
+			</form>
+			<div
+				onClick={(evt) => {
+					if (evt.target.matches('.delete-btn')) {
+						let deletedId = evt.target.Id;
+						let findedInde = countries.findIndex(
+							(todo) => todo.id == deletedId,
+						);
+						countries.splice(findedInde, 1);
+						setCountry([...countries]);
+						window.localStorage.setItem('key', JSON.stringify(countries));
+					} else if (evt.target.matches('.todo-check')) {
+						let id = evt.target.id;
+						countries.map((todo) => {
+							if (todo.id == id) {
+								todo.isComplate = !todo.isComplate;
+							}
+						});
+
+						setCountry([...countries]);
+						window.localStorage.setItem('key', JSON.stringify(countries));
+					}
+				}}>
+				<List>
+					{countries.map((el) => (
+						<Iteam name={el} />
+					))}
+					{window.localStorage.setItem('key', JSON.stringify(countries))}
+				</List>
+			</div>
+		</div>
+	);
 }
 
 export default App;
