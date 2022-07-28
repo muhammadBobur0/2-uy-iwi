@@ -51,6 +51,7 @@ function App() {
 							if (todo.id === id) {
 								todo.isComplate = !todo.isComplate;
 							}
+							return todo;
 						});
 
 						setCountry([...countries]);
