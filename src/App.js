@@ -4,13 +4,18 @@ import Iteam from './companents/item';
 import List from './companents/list';
 
 function App() {
-	window.localStorage.setItem('key', '[]');
 	const [count, setCount] = React.useState('');
 	let backlocal = JSON.parse(window.localStorage.getItem('key'));
 	let [countries, setCountry] = React.useState([]);
 
+	console.log(countries);
+
 	if (countries.length === 0) {
-		countries.push(...backlocal);
+		if (backlocal === undefined) {
+			return;
+		} else {
+			countries.push(...backlocal);
+		}
 	}
 
 	return (
