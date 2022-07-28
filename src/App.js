@@ -59,7 +59,7 @@ function App() {
 				}}>
 				<List>
 					{countries.map((el) => (
-						<Iteam name={el} />
+						<Iteam key={el.id} name={el} />
 					))}
 					{window.localStorage.setItem('key', JSON.stringify(countries))}
 				</List>
