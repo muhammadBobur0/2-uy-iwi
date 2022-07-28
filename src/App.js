@@ -6,7 +6,13 @@ import List from './companents/list';
 function App() {
 	const [count, setCount] = React.useState('');
 	let backlocal = JSON.parse(window.localStorage.getItem('key'));
-	let [countries, setCountry] = React.useState([]);
+	let [countries, setCountry] = React.useState([
+		{
+			id: 0,
+			name: '',
+			isComplate: false,
+		},
+	]);
 
 	if (countries.length === 0) {
 		if (backlocal === undefined) {

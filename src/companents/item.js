@@ -2,6 +2,9 @@ import './item.css';
 
 let Iteam = (props) => {
 	let complate = '';
+	if (props.name.name === '') {
+		return;
+	}
 	props.name.isComplate ? (complate = 'com') : (complate = '');
 
 	return (
