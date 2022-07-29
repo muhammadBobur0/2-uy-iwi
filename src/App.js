@@ -10,7 +10,7 @@ function App() {
 
 	if (countries.length === 0) {
 		if (backlocal === null) {
-			return countries.push({
+			countries.push({
 				id: 0,
 				name: '',
 				isComplate: false,
