@@ -47,7 +47,7 @@ function App() {
 					if (evt.target.matches('.delete-btn')) {
 						let deletedId = evt.target.Id;
 						let findedInde = countries.findIndex(
-							(todo) => todo.id == deletedId,
+							(todo) => todo.id === deletedId,
 						);
 						countries.splice(findedInde, 1);
 						setCountry([...countries]);
@@ -55,8 +55,8 @@ function App() {
 					} else if (evt.target.matches('.todo-check')) {
 						let id = evt.target.id;
 						countries.map((todo) => {
-							if (todo.id == id) {
-								todo.isComplate = !todo.isComplate;
+							if (todo.id === id) {
+								return (todo.isComplate = !todo.isComplate);
 							}
 						});
 
