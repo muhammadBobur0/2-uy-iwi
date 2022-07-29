@@ -53,10 +53,10 @@ function App() {
 						setCountry([...countries]);
 						window.localStorage.setItem('key', JSON.stringify(countries));
 					} else if (evt.target.matches('.todo-check')) {
-						let id = evt.target.id;
-						countries.map((todo) => {
+						let id = +evt.target.id;
+						countries.forEach((todo) => {
 							if (todo.id === id) {
-								return (todo.isComplate = !todo.isComplate);
+								todo.isComplate = !todo.isComplate;
 							}
 						});
 
@@ -65,9 +65,8 @@ function App() {
 					}
 				}}>
 				<List>
-					{countries.map((el) => (
-						<Iteam key={el.id} name={el} />
-					))}
+					{countries.length &&
+						countries.map((el) => <Iteam key={el.id} name={el} />)}
 					{window.localStorage.setItem('key', JSON.stringify(countries))}
 				</List>
 			</div>
