@@ -10,7 +10,11 @@ function App() {
 
 	if (countries.length === 0) {
 		if (backlocal === null) {
-			return;
+			return countries.push({
+				id: 0,
+				name: '',
+				isComplate: false,
+			});
 		} else {
 			countries.push(...backlocal);
 		}
