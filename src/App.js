@@ -1,24 +1,48 @@
 import React from 'react';
 import './App.css';
-import Iteam from './companents/item';
 import List from './companents/list';
 
 function App() {
 	const [count, setCount] = React.useState('');
-	let backlocal = JSON.parse(window.localStorage.getItem('key'));
-	let [countries, setCountry] = React.useState([]);
+	let [countries, setCountry] = React.useState(
+		JSON.parse(window.localStorage.getItem('key')) || [],
+	);
 
-	if (countries.length === 0) {
-		if (backlocal === null) {
-			countries.push({
-				id: 0,
-				name: '',
-				isComplate: false,
-			});
-		} else {
-			countries.push(...backlocal);
+	let [comp, setcomp] = React.useState([]);
+	let [nocomp, setmocomp] = React.useState([]);
+
+	let complates = countries.filter((e) => e.isComplate);
+	let nocomplate = countries.filter((e) => !e.isComplate);
+	let [list, setlist] = React.useState('');
+
+	function complate(evt) {
+		if (evt.target.matches('.All')) {
+			setCountry([...countries]);
+			setlist('');
+		}
+		if (evt.target.matches('.complate')) {
+			setcomp([...complates]);
+			setlist('comp');
+		}
+		if (evt.target.matches('.nocomplate')) {
+			setmocomp([...nocomplate]);
+			setlist('nocomp');
 		}
 	}
+
+	function data(evt) {
+		if (evt === '') {
+			return countries;
+		}
+		if (evt === 'comp') {
+			return comp;
+		}
+		if (evt === 'nocomp') {
+			return nocomp;
+		}
+	}
+
+	window.localStorage.setItem('key', JSON.stringify(countries));
 
 	return (
 		<div className='container'>
@@ -42,13 +66,18 @@ function App() {
 				/>
 				<button type='submit'> submit</button>
 			</form>
+			<div onClick={(evt) => complate(evt)}>
+				<button className='All'>All: {countries.length}</button>
+				<button className='complate'>complate: {complates.length}</button>
+				<button className='nocomplate'>nocomplate: {nocomplate.length}</button>
+			</div>
 			<div
 				onClick={(evt) => {
 					if (evt.target.matches('.delete-btn')) {
-						let deletedId = evt.target.Id;
-						let findedInde = countries.findIndex(
-							(todo) => todo.id === deletedId,
-						);
+						let deletedId = +evt.target.id;
+						let findedInde = countries.findIndex((todo) => {
+							return todo.id === deletedId;
+						});
 						countries.splice(findedInde, 1);
 						setCountry([...countries]);
 						window.localStorage.setItem('key', JSON.stringify(countries));
@@ -59,16 +88,21 @@ function App() {
 								todo.isComplate = !todo.isComplate;
 							}
 						});
-
 						setCountry([...countries]);
 						window.localStorage.setItem('key', JSON.stringify(countries));
 					}
+					if (evt.target.matches('.edit')) {
+						let edit = +evt.target.id;
+						let prop = prompt('kiriting');
+						countries.forEach((todo) => {
+							if (todo.id === edit) {
+								todo.name = prop;
+							}
+						});
+						setCountry([...countries]);
+					}
 				}}>
-				<List>
-					{countries.length &&
-						countries.map((el) => <Iteam key={el.id} name={el} />)}
-					{window.localStorage.setItem('key', JSON.stringify(countries))}
-				</List>
+				<List data={data(list)} />
 			</div>
 		</div>
 	);

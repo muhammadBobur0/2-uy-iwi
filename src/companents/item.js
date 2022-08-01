@@ -5,6 +5,7 @@ let Iteam = (props) => {
 	if (props.name.name === '') {
 		return;
 	}
+
 	props.name.isComplate ? (complate = 'com') : (complate = '');
 
 	return (
@@ -21,7 +22,9 @@ let Iteam = (props) => {
 			)}
 
 			<h2 className={complate}>{props.name.name}</h2>
-			<button>edit</button>
+			<button id={props.name.id} className='edit'>
+				edit
+			</button>
 			<button id={props.name.id} className='delete-btn'>
 				delate
 			</button>
