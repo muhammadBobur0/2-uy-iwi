@@ -75,13 +75,11 @@ function App() {
 				onClick={(evt) => {
 					if (evt.target.matches('.delete-btn')) {
 						let deletedId = +evt.target.id;
-						let findedInde = countries.findIndex((todo) => {
-							return todo.id === deletedId;
-						});
-						countries.splice(findedInde, 1);
-						setCountry([...countries]);
+						let deled = countries.filter((el) => +el.id !== +deletedId);
+						setCountry([...deled]);
 						window.localStorage.setItem('key', JSON.stringify(countries));
-					} else if (evt.target.matches('.todo-check')) {
+					}
+					if (evt.target.matches('.todo-check')) {
 						let id = +evt.target.id;
 						countries.forEach((todo) => {
 							if (todo.id === id) {
